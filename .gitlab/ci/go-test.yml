@@ -1,0 +1,22 @@
+go-test:
+  stage: validate
+  image: golang:1.25
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  variables:
+    GOPATH: $CI_PROJECT_DIR/.go
+  cache:
+    key:
+      files:
+        - go.sum
+    paths:
+      - .go/pkg/mod
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq unzip > /dev/null
+    - curl -sSfL -o /tmp/terraform.zip https://releases.hashicorp.com/terraform/1.13.4/terraform_1.13.4_linux_amd64.zip
+    - unzip -q /tmp/terraform.zip -d /usr/local/bin
+  script:
+    - test -z "$(gofmt -l . | grep -v '^.go/')"
+    - go vet ./...
+    - go test ./...

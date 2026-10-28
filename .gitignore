@@ -1,0 +1,8 @@
+/terraform-provider-youtrack
+/dist/
+.terraform/
+*.tfstate*
+.idea/
+.DS_Store
+.youtrack-token
+/.go/
