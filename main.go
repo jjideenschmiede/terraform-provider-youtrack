@@ -1,4 +1,5 @@
-// Copyright 2026 J&J Ideenschmiede GmbH. All rights reserved.
+// Copyright 2026 J&J Ideenschmiede GmbH
+// SPDX-License-Identifier: MPL-2.0
 
 package main
 

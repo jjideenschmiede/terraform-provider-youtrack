@@ -1,4 +1,5 @@
-// Copyright 2026 J&J Ideenschmiede GmbH. All rights reserved.
+// Copyright 2026 J&J Ideenschmiede GmbH
+// SPDX-License-Identifier: MPL-2.0
 
 package provider
 
@@ -116,7 +117,7 @@ func (r *bundleResource) Schema(_ context.Context, _ resource.SchemaRequest, res
 	}
 
 	resp.Schema = schema.Schema{
-		Description: fmt.Sprintf("Manages an %s, the set of values of a custom field. The order of `values` defines the order in YouTrack.", r.kind.label),
+		Description: fmt.Sprintf("Manages a YouTrack %s, the set of values of a custom field. The order of `values` defines the order in YouTrack.", r.kind.label),
 		Attributes: map[string]schema.Attribute{
 			"id": schema.StringAttribute{
 				Description: "Database ID of the bundle.",

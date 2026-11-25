@@ -2,6 +2,9 @@
 
 A Terraform provider that manages the configuration of JetBrains YouTrack through its REST API, from notification templates to projects, custom fields and value bundles.
 
+> [!IMPORTANT]
+> This is a community-maintained provider, developed by J&J Ideenschmiede GmbH. It is not an official JetBrains product and is not supported by JetBrains. JetBrains and YouTrack are trademarks of JetBrains s.r.o.
+
 ---
 
 ## YouTrack Apps, TeamCity Plugins & more
@@ -113,3 +116,7 @@ provider_installation {
 The documentation in `docs` is generated from the schema and the files in `examples` with `make docs`.
 
 The OpenAPI specification of your own instance is available at `https://<your-instance>/api/openapi.json`. Notification templates are not part of it, the provider uses `GET` and `POST /api/admin/notificationTemplates/{id}`.
+
+## License
+
+This provider is licensed under the [Mozilla Public License 2.0](LICENSE).

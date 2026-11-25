@@ -3,12 +3,12 @@
 page_title: "youtrack_enum_bundle Resource - youtrack"
 subcategory: ""
 description: |-
-  Manages an enum bundle, the set of values of a custom field. The order of values defines the order in YouTrack.
+  Manages a YouTrack enum bundle, the set of values of a custom field. The order of values defines the order in YouTrack.
 ---
 
 # youtrack_enum_bundle (Resource)
 
-Manages an enum bundle, the set of values of a custom field. The order of `values` defines the order in YouTrack.
+Manages a YouTrack enum bundle, the set of values of a custom field. The order of `values` defines the order in YouTrack.
 
 ## Example Usage
 

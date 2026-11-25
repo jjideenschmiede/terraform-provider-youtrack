@@ -1,4 +1,5 @@
-// Copyright 2026 J&J Ideenschmiede GmbH. All rights reserved.
+// Copyright 2026 J&J Ideenschmiede GmbH
+// SPDX-License-Identifier: MPL-2.0
 
 package provider
 
@@ -39,7 +40,7 @@ func (p *youtrackProvider) Metadata(_ context.Context, _ provider.MetadataReques
 
 func (p *youtrackProvider) Schema(_ context.Context, _ provider.SchemaRequest, resp *provider.SchemaResponse) {
 	resp.Schema = schema.Schema{
-		Description: "Manages the configuration of a JetBrains YouTrack instance through its REST API.",
+		Description: "Manages the configuration of a JetBrains YouTrack instance through its REST API. This is a community-maintained provider and not an official JetBrains product.",
 		Attributes: map[string]schema.Attribute{
 			"url": schema.StringAttribute{
 				Description: "Base URL of the YouTrack instance, for example `https://example.youtrack.cloud`. Can also be set with the `YOUTRACK_URL` environment variable.",
