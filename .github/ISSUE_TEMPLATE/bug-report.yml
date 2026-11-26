@@ -1,0 +1,110 @@
+name: Bug Report
+description: Report a problem with the Terraform Provider for YouTrack.
+title: "fix: "
+labels: ["fix"]
+assignees:
+  - gowizzard
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the fields below as precisely as possible, so we can reproduce and fix the problem quickly.
+
+        > [!IMPORTANT]
+        > Please remove any confidential data such as permanent tokens, project names, user names or URLs of your YouTrack instance from configurations, state files and logs.
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the problem as detailed as possible.
+      placeholder: When I apply a youtrack_enum_bundle with an archived value, the next plan is not empty and …
+    validations:
+      required: true
+  - type: textarea
+    id: configuration
+    attributes:
+      label: Terraform configuration
+      description: The smallest configuration that reproduces the problem.
+      render: hcl
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: How can we reproduce the problem?
+      placeholder: |
+        1. terraform apply
+        2. terraform plan
+        3. …
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen instead?
+    validations:
+      required: true
+  - type: input
+    id: provider-version
+    attributes:
+      label: Provider version
+      description: You can find the version in the output of `terraform version`.
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: terraform-version
+    attributes:
+      label: Terraform version
+      description: The first line of `terraform version`. Tell us if you use OpenTofu instead.
+      placeholder: Terraform v1.13.4
+    validations:
+      required: true
+  - type: input
+    id: youtrack-version
+    attributes:
+      label: YouTrack version
+      description: You can find the version and build under Help at the bottom of the YouTrack sidebar.
+      placeholder: 2026.2.19656
+    validations:
+      required: true
+  - type: dropdown
+    id: hosting
+    attributes:
+      label: YouTrack hosting
+      options:
+        - YouTrack Cloud
+        - YouTrack Server
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected resource or data source
+      multiple: true
+      options:
+        - youtrack_notification_template
+        - youtrack_project
+        - youtrack_custom_field
+        - youtrack_enum_bundle
+        - youtrack_state_bundle
+        - youtrack_project_custom_field
+        - youtrack_user_group
+        - youtrack_tag
+        - youtrack_saved_query
+        - youtrack_issue_link_type
+        - Data source youtrack_user
+        - Data source youtrack_user_group
+        - Data source youtrack_custom_field
+        - Provider configuration
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Output and logs
+      description: Paste the output of the failing command. A run with `TF_LOG=DEBUG` helps us the most.
+      render: shell
