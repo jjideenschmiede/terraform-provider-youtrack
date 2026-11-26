@@ -5,9 +5,12 @@ package provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
+	"net/http"
 	"net/url"
 	"sort"
+	"time"
 
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
@@ -26,6 +29,11 @@ import (
 var (
 	_ resource.Resource                = &bundleResource{}
 	_ resource.ResourceWithImportState = &bundleResource{}
+)
+
+const (
+	bundleDeleteAttempts = 10
+	bundleDeleteDelay    = 500 * time.Millisecond
 )
 
 type bundleKind struct {
@@ -239,9 +247,26 @@ func (r *bundleResource) Delete(ctx context.Context, req resource.DeleteRequest,
 	if resp.Diagnostics.HasError() {
 		return
 	}
-	if err := r.client.Delete(ctx, r.bundlePath(state.ID.ValueString())); err != nil && !isNotFound(err) {
-		addAPIError(&resp.Diagnostics, "delete", r.kind.label, err)
+	var err error
+	for attempt := 0; attempt < bundleDeleteAttempts; attempt++ {
+		if attempt > 0 {
+			select {
+			case <-ctx.Done():
+				addAPIError(&resp.Diagnostics, "delete", r.kind.label, err)
+				return
+			case <-time.After(bundleDeleteDelay):
+			}
+		}
+		err = r.client.Delete(ctx, r.bundlePath(state.ID.ValueString()))
+		if err == nil || isNotFound(err) {
+			return
+		}
+		var apiErr *client.APIError
+		if !errors.As(err, &apiErr) || apiErr.StatusCode != http.StatusBadRequest {
+			break
+		}
 	}
+	addAPIError(&resp.Diagnostics, "delete", r.kind.label, err)
 }
 
 func (r *bundleResource) ImportState(ctx context.Context, req resource.ImportStateRequest, resp *resource.ImportStateResponse) {
