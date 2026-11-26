@@ -7,6 +7,13 @@ A Terraform provider that manages the configuration of JetBrains YouTrack throug
 
 ---
 
+<div>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset=".github/images/youtrack-certified-partner-white.svg">
+    <img src=".github/images/youtrack-certified-partner-black.svg" alt="YouTrack Certified Partner" align="middle">
+  </picture>
+</div>
+
 ## YouTrack Apps, TeamCity Plugins & more
 
 ### J&J Ideenschmiede GmbH - Your Partner for JetBrains Solutions
